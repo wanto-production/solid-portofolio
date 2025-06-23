@@ -1,5 +1,5 @@
 // src/routes/blog/index.tsx
-import { createSignal, For, Show, createMemo, onMount, createEffect } from "solid-js";
+import { createSignal, For, Show, createMemo } from "solid-js";
 import { Motion } from "solid-motionone";
 import { Meta, Title } from "@solidjs/meta";
 import { createAsync, query } from "@solidjs/router";
@@ -26,20 +26,23 @@ export default function BlogPage() {
 
   const filteredBlogs = createMemo(() => {
     const all = blogs();
-    const keyword = search().toLowerCase();
-    const selected = selectedTag().trim().toLowerCase()
+    const keyword = search().toLowerCase().trim();
+    const selected = selectedTag().trim().toLowerCase();
 
     if (!all) return [];
 
     return all.filter((b) => {
-      const titleMatch = b.meta.title.toLowerCase().includes(keyword);
-      const tagsMatch = b.meta.tags?.some((tag) =>
-        tag.trim().toLowerCase().includes(selected)
-      );
+      const titleMatch = keyword
+        ? b.meta.title.toLowerCase().includes(keyword)
+        : true;
+
+      const tagsMatch = selected
+        ? b.meta.tags?.some((tag) => tag.toLowerCase().includes(selected))
+        : true;
+
       return titleMatch && tagsMatch;
     });
   });
-
 
 
   return (
@@ -88,7 +91,7 @@ export default function BlogPage() {
           <Show when={!blogs()}>
             <For each={[...Array(6)]}>
               {(_, i) => (
-                <div class="bg-white rounded-xl overflow-hidden shadow-md animate-pulse flex flex-col w-full max-w-md" key={i}>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md animate-pulse flex flex-col w-full max-w-md" >
                   <div class="h-48 w-full bg-gray-200" />
                   <div class="p-5 space-y-3">
                     <div class="h-5 bg-gray-300 rounded w-3/4" />
