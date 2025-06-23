@@ -1,7 +1,3 @@
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
-
 export type BlogMeta = {
   title: string;
   description: string;
@@ -16,26 +12,9 @@ export type BlogPost = {
   content: string;
 };
 
-const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
-
+// src/composables/fetchBlog.ts
 export async function getAllBlogs(): Promise<BlogPost[]> {
-  const files = (await fs.readdir(BLOG_DIR)).filter(file => file.endsWith(".md"));
-
-  const blogs = await Promise.all(
-    files.map(async (filename) => {
-      const filePath = path.join(BLOG_DIR, filename);
-      const fileContent = await fs.readFile(filePath, "utf-8");
-      const { data, content } = matter(fileContent);
-
-      return {
-        meta: data as BlogMeta,
-        slug: filename.replace(/\.md$/, ""),
-        content,
-      };
-    })
-  );
-
-  return blogs.sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date));
+  const res = await fetch("/blogs.json");
+  if (!res.ok) throw new Error("Failed to fetch blogs");
+  return await res.json();
 }
-
-

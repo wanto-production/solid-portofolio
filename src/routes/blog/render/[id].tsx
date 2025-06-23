@@ -8,7 +8,6 @@ import { A } from "@solidjs/router";
 import { marked } from "marked"
 
 const getBlog = query(async (params) => {
-  "use server";
   const all = await getAllBlogs()
 
   return all.find(b => b.slug == params)

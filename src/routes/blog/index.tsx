@@ -6,7 +6,6 @@ import { createAsync, query } from "@solidjs/router";
 import { getAllBlogs } from "~/composables/fetchBlog";
 
 const getBlogs = query(async () => {
-  "use server";
   const blogs = await getAllBlogs();
   return blogs;
 }, 'blogs');
