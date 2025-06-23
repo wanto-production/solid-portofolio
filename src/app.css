@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-nishimiya-light: #e6f2ff; /* Soft light blue */
+  --color-nishimiya-soft: #cce0ff; /* Soft blue for sections */
+  --color-nishimiya-pink: #3399ff; /* Accent: bright sky blue */
+  --color-nishimiya-dark: #1f2f3f; /* Teks utama */
+}
+
+* {
+  scroll-behaviour: smooth;
+  @apply capitalize;
+}
