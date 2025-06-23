@@ -62,7 +62,7 @@ export default function BlogDetailPage() {
         {/* 📃 Markdown Content */}
         <Show when={post()?.content}>
           <div
-            class="prose prose-slate dark:prose-invert max-w-none"
+            class="prose  max-w-none"
             innerHTML={marked(post()?.content)}
           />
         </Show>
