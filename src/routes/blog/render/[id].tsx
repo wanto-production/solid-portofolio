@@ -3,7 +3,7 @@ import { RouteDefinition, query, useParams } from "@solidjs/router";
 import { createAsync } from "@solidjs/router";
 import { Title, Meta } from "@solidjs/meta";
 import { getAllBlogs } from "~/composables/fetchBlog";
-import { Show } from "solid-js";
+import { createMemo, Show } from "solid-js";
 import { A } from "@solidjs/router";
 import { marked } from "marked";
 
@@ -22,6 +22,13 @@ export default function BlogDetailPage() {
   const params = useParams();
   const post = createAsync(() => getBlog(params.id));
 
+  const content = createMemo(() => {
+    if (post()?.content) {
+      //@ts-ignore
+      return marked(post()?.content)
+    }
+  })
+
   return (
     <>
       <Title>{post()?.meta.title ?? params.id} | Ikhwan Satrio</Title>
@@ -29,6 +36,7 @@ export default function BlogDetailPage() {
         name="description"
         content={post()?.meta.description ?? "Blog post by Ikhwan Satria"}
       />
+      <Meta name="keywords" content={[`post ${post()?.meta.title ?? params.is}`, "blog ikhwan satrio"].join(', ')} />
 
       <article class="max-w-3xl mx-auto px-4 sm:px-6 py-8 text-nishimiya-dark">
         {/* 🔙 Back Button */}
@@ -63,7 +71,7 @@ export default function BlogDetailPage() {
         <Show when={post()?.content}>
           <div
             class="prose  max-w-none"
-            innerHTML={marked(post()?.content)}
+            innerHTML={content()}
           />
         </Show>
       </article>

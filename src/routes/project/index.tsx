@@ -3,7 +3,7 @@ import { For } from "solid-js"
 
 import firstImage from '/src/assets/static/portofolio1.png';
 import telegramBot from '/src/assets/static/bot_tele.png';
-import { Title } from "@solidjs/meta";
+import { Meta, Title } from "@solidjs/meta";
 import { Motion } from "solid-motionone";
 
 const projects = [
@@ -29,6 +29,8 @@ export default function ProjectPage() {
   return (
     <main class=" w-full">
       <Title>projects | ikhwan satrio</Title>
+      <Meta name="keywords" content="project ikhwan satrio" />
+      <Meta name="description" content="my project here!" />
 
       <section class="min-h-screen bg-nishimiya-light text-nishimiya-dark py-16 px-6">
         <div class="max-w-6xl mx-auto">

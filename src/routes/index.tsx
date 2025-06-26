@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main class=' w-full'>
       <Title>Home | ikhwan satrio</Title>
-      <Meta name="description" content="Personal portfolio of Ikhwan Satria..." />
+      <Meta name="description" content="Personal portfolio of Ikhwan Satrio..." />
       <Meta name="author" content="Ikhwan Satria" />
 
 

@@ -51,6 +51,7 @@ export default function BlogPage() {
         name="description"
         content="Read blogs by Ikhwan Satria on programming, anime, and dev tools like NeoVim, Nuxt, and more."
       />
+      <Meta name="keywords" content={["blog of ikhwan satrio", "ikhwan satrio blog", "main blog ikhwan satrio"].join(", ")} />
 
       <div class="max-w-6xl mx-auto">
         {/* 🔍 Filter */}
